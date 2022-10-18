@@ -36,6 +36,7 @@ const Artists: React.FC<ArtistsProps> = ({ artists }) => {
 
   return (
     <div>
+      <h1>Artists Page</h1>
       <input type="text" value={searchTerm} onChange={handleSearch} />
       <ArtistList artists={filterArtists(artists)} />
       <Outlet />

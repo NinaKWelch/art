@@ -1,10 +1,13 @@
 import React from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
+import AuthProvider from '../../context/AuthProvider'
 import './style.css'
 import Layout from '../../features/Layout'
+import ProtectedRoute from '../../features/ProtectedRoute'
 import Home from '../../pages/Home'
 import Artists, { ArtistType } from '../../pages/Artists'
 import Artist from '../../pages/Artist'
+import Admin from '../../pages/Admin'
 import NoMatch from '../../pages/NoMatch'
 
 const App = () => {
@@ -21,22 +24,32 @@ const App = () => {
   }
 
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        {/** gives each Route the same surrounding style */}
-        <Route index element={<Home />} />
-        {/** fallback for the / route */}
-        <Route path="home" element={<Home />} />
-        <Route path="artists" element={<Artists artists={artists} />}>
+    <AuthProvider>
+      <Routes>
+        <Route element={<Layout />}>
+          {/** gives each Route the same surrounding style */}
+          <Route index element={<Home />} />
+          {/** fallback for the / route */}
+          <Route path="home" element={<Home />} />
+          <Route path="artists" element={<Artists artists={artists} />}>
+            <Route
+              path=":artistId"
+              element={<Artist onRemoveArtist={handleRemoveArtist} />}
+            />
+          </Route>
           <Route
-            path=":artistId"
-            element={<Artist onRemoveArtist={handleRemoveArtist} />}
+            path="admin"
+            element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            }
           />
+          <Route path="*" element={<NoMatch />} />
+          {/** equals to a 404 page of a website */}
         </Route>
-        <Route path="*" element={<NoMatch />} />
-        {/** equals to a 404 page of a website */}
-      </Route>
-    </Routes>
+      </Routes>
+    </AuthProvider>
   )
 }
 
