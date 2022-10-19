@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Search from './index'
 
 describe('Search', () => {
@@ -12,6 +12,6 @@ describe('Search', () => {
       </Search>
     )
 
-    expect(screen.getByRole('textbox')).toHaveValue('')
+    expect(screen.getByTestId('search-input')).not.toHaveValue()
   })
 })

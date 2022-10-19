@@ -5,27 +5,27 @@ import userEvent from '@testing-library/user-event'
 import App from '../../components/App'
 
 describe('Layout', () => {
-  test('renders brand name and login button', () => {
+  test('renders brand name', () => {
     renderWithRouter(<App />)
 
     const brandName = screen.getByText(/app/i)
     expect(brandName).toBeInTheDocument()
-
-    // login/logout button
-    expect(screen.getByRole('button')).toHaveTextContent('Sign In')
   })
 
   test('button toggles between login/logout when clicked', async () => {
     renderWithRouter(<App />)
 
+    // login/logout button
+    expect(screen.getByTestId('login-button')).toHaveTextContent('Sign In')
+
     // login user
-    await userEvent.click(screen.getByText('Sign In'))
+    await userEvent.click(screen.getByTestId('login-button'))
     await screen.findByText('Sign Out')
 
     expect(screen.getByText('Sign Out')).toBeInTheDocument()
 
     // logout user
-    await userEvent.click(screen.getByText('Sign Out'))
+    await userEvent.click(screen.getByTestId('login-button'))
     await screen.findByText('Sign In')
 
     expect(screen.getByText('Sign In')).toBeInTheDocument()

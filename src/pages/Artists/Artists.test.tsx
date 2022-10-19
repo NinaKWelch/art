@@ -3,7 +3,6 @@ import { renderWithRouter } from '../../utils/testUtils'
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from '../../components/App'
-import ArtistList from './ArtistList'
 
 describe('Artists', () => {
   test('renders Artists component', () => {
@@ -37,6 +36,6 @@ describe('Artists', () => {
     await screen.findByText('Remove')
     await userEvent.click(screen.getByText('Remove'))
 
-    expect(screen.queryByText('Artist 1')).toBeNull()
+    expect(screen.queryByText('Artist 1')).not.toBeInTheDocument()
   })
 })

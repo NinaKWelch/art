@@ -8,7 +8,7 @@ describe('Admin', () => {
   test('renders Admin component when user is logged in', async () => {
     renderWithRouter(<App />, { route: '/admin' })
 
-    await userEvent.click(screen.getByText('Sign In'))
+    await userEvent.click(screen.getByTestId('login-button'))
     await screen.findByText('Admin Page')
 
     expect(screen.getByText('Admin Page')).toBeInTheDocument()

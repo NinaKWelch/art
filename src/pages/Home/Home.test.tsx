@@ -12,10 +12,10 @@ describe('Home', () => {
   test('renders search input as text', async () => {
     render(<Home />)
 
-    expect(screen.queryByText(/searches for something/)).toBeNull()
+    const searchText = screen.getByTestId('search-text')
+    expect(searchText).toHaveTextContent(/^Searches for ...$/)
+    await userEvent.type(screen.getByTestId('search-input'), 'something')
 
-    await userEvent.type(screen.getByRole('textbox'), 'something')
-
-    expect(screen.getByText(/Searches for something/)).toBeInTheDocument()
+    expect(searchText).toHaveTextContent(/^Searches for something$/)
   })
 })

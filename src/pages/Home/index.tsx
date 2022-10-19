@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './style.css'
 import Search from '../../features/Search'
+import Login from '../../features/Login'
 
 const Home = () => {
   const [search, setSearch] = useState('')
@@ -16,7 +17,8 @@ const Home = () => {
         Search:
       </Search>
 
-      <p>Searches for {search ? search : '...'}</p>
+      <p data-testid="search-text">Searches for {search ? search : '...'}</p>
+      <Login />
     </div>
   )
 }

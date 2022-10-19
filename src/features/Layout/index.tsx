@@ -13,11 +13,11 @@ const Layout = () => {
         <h1>App</h1>
         <TopNav />
         {token ? (
-          <button type="button" onClick={onLogout}>
+          <button type="button" data-testid="login-button" onClick={onLogout}>
             Sign Out
           </button>
         ) : (
-          <button type="button" onClick={onLogin}>
+          <button type="button" data-testid="login-button" onClick={onLogin}>
             Sign In
           </button>
         )}

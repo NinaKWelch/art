@@ -8,7 +8,7 @@ describe('ProtectedRoute', () => {
   test('redirects an unsigned user from protected route to home page', () => {
     renderWithRouter(<App />, { route: '/admin' })
 
-    expect(screen.queryByText('Admin Page')).toBeNull()
+    expect(screen.queryByText('Admin Page')).not.toBeInTheDocument()
     expect(screen.getByText('Home Page')).toBeInTheDocument()
   })
 
@@ -16,7 +16,7 @@ describe('ProtectedRoute', () => {
     renderWithRouter(<App />, { route: '/admin' })
 
     // login user
-    await userEvent.click(screen.getByText('Sign In'))
+    await userEvent.click(screen.getByTestId('login-button'))
     await screen.findByText('Admin Page')
 
     expect(screen.getByText('Admin Page')).toBeInTheDocument()

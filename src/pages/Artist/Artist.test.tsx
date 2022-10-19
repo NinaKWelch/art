@@ -14,9 +14,10 @@ describe('Artist', () => {
   test('removes artist when Remove button is clicked', async () => {
     renderWithRouter(<App />, { route: '/artists/1' })
 
+    expect(screen.getByText('1')).toBeInTheDocument()
+
     await userEvent.click(screen.getByText('Remove'))
 
-    expect(screen.queryByText('1')).toBeNull()
-    
+    expect(screen.queryByText('1')).not.toBeInTheDocument()
   })
 })

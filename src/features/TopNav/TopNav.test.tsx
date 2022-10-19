@@ -32,7 +32,7 @@ describe('TopNav', () => {
     // click on admin link (unsigned user should be redirected to home page)
     fireEvent.click(screen.getByText('Admin'))
 
-    expect(screen.queryByText('Admin Page')).toBeNull()
+    expect(screen.queryByText('Admin Page')).not.toBeInTheDocument()
     expect(screen.getByText('Home Page')).toBeInTheDocument()
   })
 })
